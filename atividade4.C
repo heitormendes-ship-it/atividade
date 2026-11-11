@@ -1,10 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    float total = 0.0; // acumula o valor total guardado no cofrinho
-    int opcao;          // opção escolhida pelo usuário no menu
+    float total = 0.0;
+    int opcao = 0;
 
-    // Repete até o usuário escolher a opção de parar (4)
     do {
         printf("\n--- Cofrinho Digital ---\n");
         printf("Saldo atual: R$ %.2f\n", total);
@@ -14,9 +13,15 @@ int main() {
         printf("3 - R$ 2,00\n");
         printf("4 - Parar e ver o total\n");
         printf("Opcao: ");
-        scanf("%d", &opcao);
 
-        // Com base na escolha, soma o valor correspondente ao total
+        // se a leitura falhar (ex.: letra), limpa o buffer e pede de novo
+        if (scanf("%d", &opcao) != 1) {
+            while (getchar() != '\n');
+            printf("Entrada invalida! Digite um numero.\n");
+            opcao = 0;
+            continue;
+        }
+
         switch (opcao) {
             case 1:
                 total += 0.50;
@@ -28,13 +33,12 @@ int main() {
                 total += 2.00;
                 break;
             case 4:
-                // Não faz nada aqui, apenas encerra o laço na condição do "while"
                 break;
             default:
                 printf("Opcao invalida! Tente novamente.\n");
         }
 
-    } while (opcao != 4); // continua enquanto o usuário não escolher parar
+    } while (opcao != 4);
 
     printf("\nVoce parou de adicionar moedas.\n");
     printf("Total acumulado no cofrinho: R$ %.2f\n", total);
