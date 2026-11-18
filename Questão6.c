@@ -1,59 +1,52 @@
+/*
+ * Aula 06 — Questão 6 — Estoque de 10 produtos
+ * Material da Profa. Joanacelle Caldas, página 29.
+ *
+ * Uma loja possui 10 produtos. Armazene em um vetor a quantidade disponível de
+ * cada produto e apresente os seguintes resultados.
+ *
+ * - A quantidade de cada produto.
+ * - Os produtos com estoque baixo, com menos de 5 unidades.
+ * - Os produtos esgotados, com 0 unidades.
+ * - O número de produtos com mais de 20 unidades.
+ * - O produto com a maior quantidade em estoque.
+ */
+
 #include <stdio.h>
 
-int main() {
-    float nota1, nota2, nota3;
-    float media;
+int main(void) {
+    int estoque[10];
+    int acimaDeVinte = 0;
+    int maior = 0;
 
-    int aprovados = 0;
-    int recuperacao = 0;
-    int reprovados = 0;
-
-    char continuar;
-
-    do {
-        printf("\n===== NOTAS DO ALUNO =====\n");
-
-        // Leitura das tres notas
-        printf("Digite a primeira nota: ");
-        scanf("%f", &nota1);
-
-        printf("Digite a segunda nota: ");
-        scanf("%f", &nota2);
-
-        printf("Digite a terceira nota: ");
-        scanf("%f", &nota3);
-
-        // Calculo da media
-        media = (nota1 + nota2 + nota3) / 3;
-
-        printf("Media do aluno: %.2f\n", media);
-
-        // Verifica a situacao do aluno
-        if (media >= 7) {
-            printf("Situacao: APROVADO\n");
-            aprovados++;
-        } else if (media >= 5) {
-            printf("Situacao: RECUPERACAO\n");
-            recuperacao++;
-        } else {
-            printf("Situacao: REPROVADO\n");
-            reprovados++;
+    for (int i = 0; i < 10; i++) {
+        printf("Digite a quantidade do produto %d: ", i + 1);
+        if (scanf("%d", &estoque[i]) != 1 || estoque[i] < 0) {
+            puts("Quantidade invalida.");
+            return 1;
         }
+    }
 
-        // Pergunta se deseja continuar
-        printf("\nDeseja cadastrar outro aluno? (s/n): ");
-        scanf(" %c", &continuar);
+    puts("\nEstoque por produto");
+    for (int i = 0; i < 10; i++) {
+        printf("Produto %d: %d unidade(s)", i + 1, estoque[i]);
+        if (estoque[i] < 5) {
+            printf(" [estoque baixo]");
+        }
+        if (estoque[i] == 0) {
+            printf(" [esgotado]");
+        }
+        putchar('\n');
 
-    } while (continuar == 's' || continuar == 'S');
+        if (estoque[i] > 20) {
+            acimaDeVinte++;
+        }
+        if (estoque[i] > estoque[maior]) {
+            maior = i;
+        }
+    }
 
-    // Exibe o resultado final
-    printf("\n=============================\n");
-    printf("        RESULTADO FINAL\n");
-    printf("=============================\n");
-    printf("Alunos aprovados: %d\n", aprovados);
-    printf("Alunos em recuperacao: %d\n", recuperacao);
-    printf("Alunos reprovados: %d\n", reprovados);
-    printf("=============================\n");
-
+    printf("\nProdutos com mais de 20 unidades: %d\n", acimaDeVinte);
+    printf("Maior estoque: produto %d com %d unidade(s).\n", maior + 1, estoque[maior]);
     return 0;
 }

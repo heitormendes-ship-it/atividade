@@ -1,31 +1,39 @@
+/*
+ * Aula 06 — Questão 4 — Matriz de notas e médias
+ * Material da Profa. Joanacelle Caldas, páginas 25–26.
+ *
+ * Leia três notas de cada um de três alunos e calcule a média de cada aluno.
+ * Armazene os dados em uma matriz bidimensional. As três primeiras colunas
+ * devem conter as notas e a quarta deve conter a média. Ao final, exiba a
+ * tabela.
+ */
+
 #include <stdio.h>
 
-int main() {
-    int numero;
-    int pares = 0;
-    int impares = 0;
-    int i;
+int main(void) {
+    double notas[3][4];
 
-    // Leitura de 10 numeros inteiros
-    for (i = 1; i <= 10; i++) {
-        printf("Digite o %d numero inteiro: ", i);
-        scanf("%d", &numero);
-
-        // Verifica se o numero e par ou impar
-        if (numero % 2 == 0) {
-            printf("%d e par.\n", numero);
-            pares++;
-        } else {
-            printf("%d e impar.\n", numero);
-            impares++;
+    for (int aluno = 0; aluno < 3; aluno++) {
+        double soma = 0;
+        for (int nota = 0; nota < 3; nota++) {
+            printf("Digite a nota %d do aluno %d: ", nota + 1, aluno + 1);
+            if (scanf("%lf", &notas[aluno][nota]) != 1) {
+                puts("Nota invalida.");
+                return 1;
+            }
+            soma += notas[aluno][nota];
         }
+        notas[aluno][3] = soma / 3;
     }
 
-    // Apresenta os resultados finais
-    printf("\n============================\n");
-    printf("Quantidade de numeros pares: %d\n", pares);
-    printf("Quantidade de numeros impares: %d\n", impares);
-    printf("============================\n");
+    puts("\n           Nota 1  Nota 2  Nota 3   Media");
+    for (int aluno = 0; aluno < 3; aluno++) {
+        printf("Aluno %d ", aluno + 1);
+        for (int coluna = 0; coluna < 4; coluna++) {
+            printf("%8.2f", notas[aluno][coluna]);
+        }
+        putchar('\n');
+    }
 
     return 0;
 }

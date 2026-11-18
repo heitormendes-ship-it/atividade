@@ -1,31 +1,29 @@
+/*
+ * Aula 06 — Questão 1 — Nome e média de um aluno
+ * Material da Profa. Joanacelle Caldas, página 14.
+ *
+ * Crie uma aplicação para ler o nome e a média de um aluno. Em seguida, exiba
+ * os valores lidos.
+ */
+
 #include <stdio.h>
 
-int main() {
-    float consumo[5];
-    float soma = 0.0;
-    float media;
-    int i;
+int main(void) {
+    char nome[80];
+    double media;
 
-    // Leitura do consumo dos 5 moradores
-    for (i = 0; i < 5; i++) {
-        printf("Digite o consumo de agua do morador %d (em m3): ", i + 1);
-        scanf("%f", &consumo[i]);
-
-        // Soma dos consumos para calcular a media geral
-        soma += consumo[i];
-
-        // Verifica se o consumo esta dentro ou acima da media
-        if (consumo[i] <= 20) {
-            printf("Morador %d: consumo dentro da media.\n", i + 1);
-        } else {
-            printf("Morador %d: consumo acima da media.\n", i + 1);
-        }
+    printf("Digite o nome do aluno: ");
+    if (scanf(" %79[^\n]", nome) != 1) {
+        puts("Nome invalido.");
+        return 1;
     }
 
-    // Calcula o consumo medio geral
-    media = soma / 5;
+    printf("Digite a media do aluno: ");
+    if (scanf("%lf", &media) != 1) {
+        puts("Media invalida.");
+        return 1;
+    }
 
-    printf("\nConsumo medio geral: %.2f m3\n", media);
-
+    printf("\nAluno: %s\nMedia: %.2f\n", nome, media);
     return 0;
 }
