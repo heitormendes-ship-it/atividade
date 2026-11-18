@@ -1,43 +1,30 @@
 /*
- * Aula 06 — Questão 3 — Matriz de inteiros
- * Material da Profa. Joanacelle Caldas, páginas 22–23.
+ * Aula 07 — Questão 3 — Maior de dois números
+ * Material da Profa. Joanacelle Caldas, página 26.
  *
- * Gere uma matriz 3 × 3 de inteiros. Exiba os elementos de cada linha
- * separados por um traço e coloque cada linha da matriz em uma nova linha da
- * saída.
- *
- * Exemplo de saída
- *
- * 300 - 5 - 3
- * 4 - 10 - 3
- * 12 - 337 - 5
+ * Crie a função maiorNumero, que recebe dois inteiros e retorna o maior. Caso
+ * sejam iguais, retorne qualquer um dos valores.
  */
 
 #include <stdio.h>
 
+int maiorNumero(int primeiro, int segundo) {
+    if (primeiro >= segundo) {
+        return primeiro;
+    }
+    return segundo;
+}
+
 int main(void) {
-    int matriz[3][3];
+    int primeiro;
+    int segundo;
 
-    for (int linha = 0; linha < 3; linha++) {
-        for (int coluna = 0; coluna < 3; coluna++) {
-            printf("Digite o inteiro da linha %d, coluna %d: ", linha + 1, coluna + 1);
-            if (scanf("%d", &matriz[linha][coluna]) != 1) {
-                puts("Entrada invalida.");
-                return 1;
-            }
-        }
+    printf("Digite dois inteiros: ");
+    if (scanf("%d %d", &primeiro, &segundo) != 2) {
+        puts("Entrada invalida.");
+        return 1;
     }
 
-    puts("\nMatriz 3 x 3");
-    for (int linha = 0; linha < 3; linha++) {
-        for (int coluna = 0; coluna < 3; coluna++) {
-            if (coluna > 0) {
-                printf(" - ");
-            }
-            printf("%d", matriz[linha][coluna]);
-        }
-        putchar('\n');
-    }
-
+    printf("Maior numero: %d\n", maiorNumero(primeiro, segundo));
     return 0;
 }

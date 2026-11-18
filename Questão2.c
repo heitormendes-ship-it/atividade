@@ -1,35 +1,26 @@
 /*
- * Aula 06 — Questão 2 — Nome e média de 30 alunos
- * Material da Profa. Joanacelle Caldas, páginas 20–21.
+ * Aula 07 — Questão 2 — Dobro de um inteiro
+ * Material da Profa. Joanacelle Caldas, página 26.
  *
- * Crie uma aplicação que use vetores para ler o nome e a média de 30 alunos.
- * Em seguida, exiba a lista com os nomes e as médias.
+ * Crie a função calcularDobro, que recebe um inteiro e retorna seu dobro. Na
+ * main, leia um número, chame a função e exiba o resultado.
  */
 
 #include <stdio.h>
 
+long long calcularDobro(int numero) {
+    return 2LL * numero;
+}
+
 int main(void) {
-    char nomes[30][80];
-    double medias[30];
+    int numero;
 
-    for (int i = 0; i < 30; i++) {
-        printf("Digite o nome do aluno %d: ", i + 1);
-        if (scanf(" %79[^\n]", nomes[i]) != 1) {
-            puts("Nome invalido.");
-            return 1;
-        }
-
-        printf("Digite a media do aluno %d: ", i + 1);
-        if (scanf("%lf", &medias[i]) != 1) {
-            puts("Media invalida.");
-            return 1;
-        }
+    printf("Digite um inteiro: ");
+    if (scanf("%d", &numero) != 1) {
+        puts("Entrada invalida.");
+        return 1;
     }
 
-    puts("\nLista de alunos e medias");
-    for (int i = 0; i < 30; i++) {
-        printf("%d. %s - %.2f\n", i + 1, nomes[i], medias[i]);
-    }
-
+    printf("Dobro: %lld\n", calcularDobro(numero));
     return 0;
 }

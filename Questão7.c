@@ -1,59 +1,41 @@
+/*
+ * Aula 07 — Questão 7 — Média e situação do aluno
+ * Material da Profa. Joanacelle Caldas, página 27.
+ *
+ * Crie a função calcularMedia, que recebe três notas e retorna a média
+ * aritmética, e a função verificarSituacao, que recebe a média e exibe a
+ * situação do aluno. Uma média de pelo menos 7,0 indica aprovação. Abaixo de
+ * 7,0, o aluno está reprovado. Na main, leia as três notas, calcule a média e
+ * apresente a situação.
+ */
+
 #include <stdio.h>
 
-int main() {
-    float nota1, nota2, nota3;
-    float media;
+double calcularMedia(double nota1, double nota2, double nota3) {
+    return (nota1 + nota2 + nota3) / 3;
+}
 
-    int aprovados = 0;
-    int recuperacao = 0;
-    int reprovados = 0;
+void verificarSituacao(double media) {
+    if (media >= 7.0) {
+        puts("Situacao: Aprovado");
+    } else {
+        puts("Situacao: Reprovado");
+    }
+}
 
-    char continuar;
+int main(void) {
+    double nota1;
+    double nota2;
+    double nota3;
 
-    do {
-        printf("\n===== NOTAS DO ALUNO =====\n");
+    printf("Digite as tres notas: ");
+    if (scanf("%lf %lf %lf", &nota1, &nota2, &nota3) != 3) {
+        puts("Nota invalida.");
+        return 1;
+    }
 
-        // Leitura das tres notas
-        printf("Digite a primeira nota: ");
-        scanf("%f", &nota1);
-
-        printf("Digite a segunda nota: ");
-        scanf("%f", &nota2);
-
-        printf("Digite a terceira nota: ");
-        scanf("%f", &nota3);
-
-        // Calculo da media
-        media = (nota1 + nota2 + nota3) / 3;
-
-        printf("Media do aluno: %.2f\n", media);
-
-        // Verifica a situacao do aluno
-        if (media >= 7) {
-            printf("Situacao: APROVADO\n");
-            aprovados++;
-        } else if (media >= 5) {
-            printf("Situacao: RECUPERACAO\n");
-            recuperacao++;
-        } else {
-            printf("Situacao: REPROVADO\n");
-            reprovados++;
-        }
-
-        // Pergunta se deseja continuar
-        printf("\nDeseja cadastrar outro aluno? (s/n): ");
-        scanf(" %c", &continuar);
-
-    } while (continuar == 's' || continuar == 'S');
-
-    // Exibe o resultado final
-    printf("\n=============================\n");
-    printf("        RESULTADO FINAL\n");
-    printf("=============================\n");
-    printf("Alunos aprovados: %d\n", aprovados);
-    printf("Alunos em recuperacao: %d\n", recuperacao);
-    printf("Alunos reprovados: %d\n", reprovados);
-    printf("=============================\n");
-
+    double media = calcularMedia(nota1, nota2, nota3);
+    printf("Media: %.2f\n", media);
+    verificarSituacao(media);
     return 0;
 }

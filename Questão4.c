@@ -1,39 +1,27 @@
 /*
- * Aula 06 — Questão 4 — Matriz de notas e médias
- * Material da Profa. Joanacelle Caldas, páginas 25–26.
+ * Aula 07 — Questão 4 — Celsius para Fahrenheit
+ * Material da Profa. Joanacelle Caldas, página 26.
  *
- * Leia três notas de cada um de três alunos e calcule a média de cada aluno.
- * Armazene os dados em uma matriz bidimensional. As três primeiras colunas
- * devem conter as notas e a quarta deve conter a média. Ao final, exiba a
- * tabela.
+ * Crie a função celsiusParaFahrenheit, que recebe uma temperatura em Celsius e
+ * retorna o valor em Fahrenheit pela fórmula F = (9 × C) / 5 + 32. Na main,
+ * solicite a temperatura e apresente o resultado com duas casas decimais.
  */
 
 #include <stdio.h>
 
+double celsiusParaFahrenheit(double celsius) {
+    return celsius * (9.0 / 5.0) + 32.0;
+}
+
 int main(void) {
-    double notas[3][4];
+    double celsius;
 
-    for (int aluno = 0; aluno < 3; aluno++) {
-        double soma = 0;
-        for (int nota = 0; nota < 3; nota++) {
-            printf("Digite a nota %d do aluno %d: ", nota + 1, aluno + 1);
-            if (scanf("%lf", &notas[aluno][nota]) != 1) {
-                puts("Nota invalida.");
-                return 1;
-            }
-            soma += notas[aluno][nota];
-        }
-        notas[aluno][3] = soma / 3;
+    printf("Digite a temperatura em Celsius: ");
+    if (scanf("%lf", &celsius) != 1) {
+        puts("Temperatura invalida.");
+        return 1;
     }
 
-    puts("\n           Nota 1  Nota 2  Nota 3   Media");
-    for (int aluno = 0; aluno < 3; aluno++) {
-        printf("Aluno %d ", aluno + 1);
-        for (int coluna = 0; coluna < 4; coluna++) {
-            printf("%8.2f", notas[aluno][coluna]);
-        }
-        putchar('\n');
-    }
-
+    printf("Temperatura em Fahrenheit: %.2f\n", celsiusParaFahrenheit(celsius));
     return 0;
 }

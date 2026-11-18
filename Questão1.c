@@ -1,29 +1,21 @@
 /*
- * Aula 06 — Questão 1 — Nome e média de um aluno
- * Material da Profa. Joanacelle Caldas, página 14.
+ * Aula 07 — Questão 1 — Saudação
+ * Material da Profa. Joanacelle Caldas, página 26.
  *
- * Crie uma aplicação para ler o nome e a média de um aluno. Em seguida, exiba
- * os valores lidos.
+ * Crie a função mostrarSaudacao() para exibir a mensagem “Bem-vindo ao mundo
+ * das funções em C!”. Chame a função três vezes na main.
  */
 
 #include <stdio.h>
 
+void mostrarSaudacao(void) {
+    puts("Bem-vindo ao mundo das funções em C!");
+}
+
 int main(void) {
-    char nome[80];
-    double media;
-
-    printf("Digite o nome do aluno: ");
-    if (scanf(" %79[^\n]", nome) != 1) {
-        puts("Nome invalido.");
-        return 1;
+    for (int i = 0; i < 3; i++) {
+        mostrarSaudacao();
     }
 
-    printf("Digite a media do aluno: ");
-    if (scanf("%lf", &media) != 1) {
-        puts("Media invalida.");
-        return 1;
-    }
-
-    printf("\nAluno: %s\nMedia: %.2f\n", nome, media);
     return 0;
 }

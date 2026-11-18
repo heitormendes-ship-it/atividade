@@ -1,52 +1,72 @@
 /*
- * Aula 06 — Questão 6 — Estoque de 10 produtos
- * Material da Profa. Joanacelle Caldas, página 29.
+ * Aula 07 — Questão 6 — Calculadora
+ * Material da Profa. Joanacelle Caldas, página 26.
  *
- * Uma loja possui 10 produtos. Armazene em um vetor a quantidade disponível de
- * cada produto e apresente os seguintes resultados.
- *
- * - A quantidade de cada produto.
- * - Os produtos com estoque baixo, com menos de 5 unidades.
- * - Os produtos esgotados, com 0 unidades.
- * - O número de produtos com mais de 20 unidades.
- * - O produto com a maior quantidade em estoque.
+ * Implemente uma função para cada operação básica (adição, subtração,
+ * multiplicação e divisão). Cada função recebe dois números e retorna o
+ * resultado. Leia dois números e uma opção de operação, chame a função
+ * correspondente e exiba o resultado. Antes de dividir, verifique se o divisor
+ * é diferente de zero.
  */
 
 #include <stdio.h>
 
+double somar(double primeiro, double segundo) {
+    return primeiro + segundo;
+}
+
+double subtrair(double primeiro, double segundo) {
+    return primeiro - segundo;
+}
+
+double multiplicar(double primeiro, double segundo) {
+    return primeiro * segundo;
+}
+
+double dividir(double primeiro, double segundo) {
+    return primeiro / segundo;
+}
+
 int main(void) {
-    int estoque[10];
-    int acimaDeVinte = 0;
-    int maior = 0;
+    double primeiro;
+    double segundo;
+    double resultado;
+    char operacao;
 
-    for (int i = 0; i < 10; i++) {
-        printf("Digite a quantidade do produto %d: ", i + 1);
-        if (scanf("%d", &estoque[i]) != 1 || estoque[i] < 0) {
-            puts("Quantidade invalida.");
+    printf("Digite dois numeros: ");
+    if (scanf("%lf %lf", &primeiro, &segundo) != 2) {
+        puts("Entrada invalida.");
+        return 1;
+    }
+
+    printf("Digite a operacao (+, -, *, /): ");
+    if (scanf(" %c", &operacao) != 1) {
+        puts("Operacao invalida.");
+        return 1;
+    }
+
+    switch (operacao) {
+        case '+':
+            resultado = somar(primeiro, segundo);
+            break;
+        case '-':
+            resultado = subtrair(primeiro, segundo);
+            break;
+        case '*':
+            resultado = multiplicar(primeiro, segundo);
+            break;
+        case '/':
+            if (segundo == 0) {
+                puts("Divisao por zero.");
+                return 1;
+            }
+            resultado = dividir(primeiro, segundo);
+            break;
+        default:
+            puts("Operacao invalida.");
             return 1;
-        }
     }
 
-    puts("\nEstoque por produto");
-    for (int i = 0; i < 10; i++) {
-        printf("Produto %d: %d unidade(s)", i + 1, estoque[i]);
-        if (estoque[i] < 5) {
-            printf(" [estoque baixo]");
-        }
-        if (estoque[i] == 0) {
-            printf(" [esgotado]");
-        }
-        putchar('\n');
-
-        if (estoque[i] > 20) {
-            acimaDeVinte++;
-        }
-        if (estoque[i] > estoque[maior]) {
-            maior = i;
-        }
-    }
-
-    printf("\nProdutos com mais de 20 unidades: %d\n", acimaDeVinte);
-    printf("Maior estoque: produto %d com %d unidade(s).\n", maior + 1, estoque[maior]);
+    printf("Resultado: %.2f\n", resultado);
     return 0;
 }

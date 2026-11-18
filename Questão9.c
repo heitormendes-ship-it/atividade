@@ -1,45 +1,28 @@
+/*
+ * Aula 07 — Questão 9 — Tabuada
+ * Material da Profa. Joanacelle Caldas, página 27.
+ *
+ * Crie a função mostrarTabuada, que recebe um inteiro e exibe sua tabuada de 1
+ * a 10. Na main, leia o número informado e chame a função.
+ */
+
 #include <stdio.h>
 
-int main() {
+void mostrarTabuada(int numero) {
+    for (int fator = 1; fator <= 10; fator++) {
+        printf("%d x %d = %lld\n", numero, fator, (long long)numero * fator);
+    }
+}
+
+int main(void) {
     int numero;
 
-    int somaPositivos = 0;
-    int somaNegativos = 0;
-
-    int quantidadePositivos = 0;
-    int quantidadeNegativos = 0;
-
-    // Leitura continua ate o usuario digitar 0
-    printf("Digite um numero inteiro (0 para encerrar): ");
-    scanf("%d", &numero);
-
-    while (numero != 0) {
-
-        // Verifica se o numero e positivo
-        if (numero > 0) {
-            somaPositivos += numero;
-            quantidadePositivos++;
-        }
-
-        // Verifica se o numero e negativo
-        else {
-            somaNegativos += numero;
-            quantidadeNegativos++;
-        }
-
-        printf("Digite outro numero inteiro (0 para encerrar): ");
-        scanf("%d", &numero);
+    printf("Digite um inteiro: ");
+    if (scanf("%d", &numero) != 1) {
+        puts("Entrada invalida.");
+        return 1;
     }
 
-    // Exibe os resultados
-    printf("\n============================\n");
-    printf("RESULTADO FINAL\n");
-    printf("============================\n");
-
-    printf("Soma dos positivos: %d\n", somaPositivos);
-    printf("Soma dos negativos: %d\n", somaNegativos);
-    printf("Quantidade de positivos: %d\n", quantidadePositivos);
-    printf("Quantidade de negativos: %d\n", quantidadeNegativos);
-
+    mostrarTabuada(numero);
     return 0;
 }
